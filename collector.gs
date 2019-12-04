@@ -75,7 +75,7 @@ function topAlertProducers() {
   var FechaFin = sheetCollector.getRange("L5").getValue();
   var Cliente = sheetConfig.getRange("B6").getValue();  
   var url = 'jdbc:mysql://'+host+':'+port+'/'+database;
-  var Top25 = 'SELECT ticket.title, COUNT(1) AS Total FROM customer_company, ticket WHERE ticket.customer_id = customer_company.customer_id AND customer_company.valid_id = 1 AND customer_company.customer_id  = "'+Cliente+'" AND ticket.create_time BETWEEN CONCAT(date_format(LAST_DAY(now() - interval 1 month),"%Y-%m-"),"01 00:00:00") AND concat(date_format(LAST_DAY(now() - interval 1 month),"%Y-%m-%d")," 23:59:59") GROUP BY ticket.title ORDER BY Total desc limit 0, 25';
+  var Top25 = 'SELECT ticket.title, COUNT(1) AS Total FROM customer_company, ticket WHERE ticket.customer_id = customer_company.customer_id AND ticket.archive_flag IN (0,1) AND ticket.queue_id IN(8,9,10) AND customer_company.customer_id  = "'+Cliente+'" AND ticket.create_time BETWEEN CONCAT(date_format(LAST_DAY(now() - interval 1 month),"%Y-%m-"),"01 00:00:00") AND concat(date_format(LAST_DAY(now() - interval 1 month),"%Y-%m-%d")," 23:59:59") GROUP BY ticket.title ORDER BY Total desc limit 0, 25';
 
   try{
     var connection = Jdbc.getConnection(url, user, password); 
