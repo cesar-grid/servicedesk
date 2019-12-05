@@ -56,7 +56,7 @@ function eventosOTRS() {
     result.close();
   //Escribe datos en las celdas
     sheetCollector.getRange(1,1, values.length, value.length).setValues(values);
-    SpreadsheetApp.getActive().toast('Datos actualizado correctamente [Tab: Collector]!');
+    SpreadsheetApp.getActive().toast('Datos actualizado correctamente en [Tab: Collector]!');
   }catch(err){
     SpreadsheetApp.getActive().toast(err.message);
   } 
